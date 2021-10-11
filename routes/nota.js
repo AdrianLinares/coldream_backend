@@ -2,7 +2,6 @@ import express from "express";
 const router = express.Router();
 
 // importar modelos
-import User from "../models/user";
 import Nota from "../models/nota";
 
 // Middlewares
@@ -34,7 +33,7 @@ router.get("/nota/:id", async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       mensaje: "Ocurrio un error",
-      error,
+      error
     });
   }
 });
@@ -50,12 +49,12 @@ router.get("/nota", verificarAuth, async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       mensaje: "Ocurrio un error",
-      error,
+      error
     });
   }
 });
 
-// Delete eliminar una nota
+/* // Delete eliminar una nota
 router.delete("/nota/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
   const _id = req.params.id;
   try {
@@ -88,7 +87,7 @@ router.put("/nota/:id", [verificarAuth, verificarAdministrador], async (req, res
       error,
     });
   }
-});
+}); */
 
 // Exportamos la configuración de express app
 module.exports = router;

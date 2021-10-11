@@ -27,7 +27,6 @@ router.post('/nuevo-usuario', async (req, res) => {
   try {
 
     const usuarioDB = await User.create(body);
-
     return res.json(usuarioDB);
     
   } catch (error) {
@@ -44,6 +43,7 @@ router.put('/usuario/:id', [verificarAuth, verificarAdministrador], async(req, r
 
   const _id = req.params.id;
   const body = _.pick(req.body, ['nombre', 'email', 'pass', 'activo']);
+
   if(body.pass){
     body.pass = bcrypt.hashSync(req.body.pass, saltRounds);
   }
@@ -68,7 +68,6 @@ router.delete('/usuario/:id', async(req, res) => {
   const id = req.params.id;
 
   try {
-
     const usuarioDelete = await User.findByIdAndRemove(id);
 
     if(!usuarioDelete){

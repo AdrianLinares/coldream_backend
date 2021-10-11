@@ -5,19 +5,22 @@ const jwt = require("jsonwebtoken");
 
 import User from "../models/user";
 
-
 //Hash Contraseña
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+/* router.get('/', async(req, res) => {
+  return res.json({mensaje: 'loging de acceso'})
+}); */
+
 router.post("/", async (req, res) => {
+
   const body = req.body;
 
   try {
+
     // Buscamos email en DB
     const usuarioDB = await User.findOne({ email: body.email });
-
-    // Evaluamos si existe el usuario en DB
     if (!usuarioDB) {
       return res.status(400).json({
         mensaje: "Usuario! o contraseña inválidos",

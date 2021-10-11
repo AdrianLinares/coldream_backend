@@ -22,19 +22,17 @@ const verificarAuth = (req, res, next) => {
 
 }
 
-let verificarAdministrador = (req, res, next) => {
+const verificarAdministrador = (req, res, next) => {
 
-  let role = req.usuario.role;
+  const rol = req.usuario.role
 
-  console.log(role);
-  
-  if(role !== 'ADMIN'){
+  if(rol === 'ADMIN'){
+    next();
+  }else{
     return res.status(401).json({
-      mensaje: 'Rol no autorizado!'
+      mensaje: 'Usuario no válido'
     })
   }
-  
-  next();
 
 }
 

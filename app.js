@@ -8,12 +8,13 @@ const app = express();
 // Conexion a Mongo DB
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://tarkian20:Alastor66246@coldream.bq7rc.mongodb.net/coldream";
+
 const options = {};
 mongoose.connect(uri, options).then(
     () => {
         console.log('Conectado a mongoDB');
     },
-    err => {  }
+    err => { err }
 );
 
 // Middleware
@@ -31,10 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 //-----------Rutas-------------//
 app.use('/api', require('./routes/nota'));
 app.use('/api', require('./routes/user'));
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
 app.use('/login', require('./routes/login'));
-app.use("/nota", require("./routes/nota"));
 
 
 
