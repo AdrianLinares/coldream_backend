@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 //-----------Rutas-------------//
 app.use('/api', require('./routes/nota'));
 app.use('/api', require('./routes/user'));
-app.use('/login', require('./routes/login'));
+app.use('/api/login', require('./routes/login'));
 
 
 
