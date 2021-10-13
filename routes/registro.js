@@ -1,35 +1,35 @@
 import express from "express";
+import Registro from "../models/registro";
 const router = express.Router();
 
-// importar modelos
-import Nota from "../models/nota";
+
 
 // Middlewares
 const {verificarAuth, verificarAdministrador} = require('../middlewares/autenticacion');
 
-// Agregar una nota
-router.post("/nueva-nota", [verificarAuth, verificarAdministrador], async (req, res) => {
+// Agregar un registro
+router.post("/nuevo-registro", [verificarAuth, verificarAdministrador], async (req, res) => {
   const body = req.body;
 
   body.usuarioId = req.usuario._id;
 
   try {
-    const notaDB = await Nota.create(body);
-    res.status(200).json(notaDB);
+    const registroDB = await Registro.create(body);
+    res.status(200).json(registroDB);
   } catch (error) {
     return res.status(500).json({
-      mensaje: "Error al crear nota",
+      mensaje: "Error al crear registro",
       error,
     });
   }
 });
 
 // Get con parámetros
-router.get("/nota/:id", async (req, res) => {
+router.get("/registro/:id", async (req, res) => {
   const _id = req.params.id;
   try {
-    const notaDB = await Nota.findOne({ _id });
-    res.json(notaDB);
+    const registroDB = await Registro.findOne({ _id });
+    res.json(registroDB);
   } catch (error) {
     return res.status(400).json({
       mensaje: "Ocurrio un error",
@@ -39,13 +39,13 @@ router.get("/nota/:id", async (req, res) => {
 });
 
 // Get con todos los documentos
-router.get("/nota", verificarAuth, async (req, res) => {
+router.get("/registro", verificarAuth, async (req, res) => {
 
   const usuarioId = req.usuario._id
 
   try {
-    const notaDb = await Nota.find({usuarioId});
-    res.json(notaDb);
+    const registroDb = await Registro.find({usuarioId});
+    res.json(registroDb);
   } catch (error) {
     return res.status(400).json({
       mensaje: "Ocurrio un error",
@@ -54,18 +54,18 @@ router.get("/nota", verificarAuth, async (req, res) => {
   }
 });
 
-// Delete eliminar una nota
-router.delete("/nota/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+// Delete eliminar una registro
+router.delete("/registro/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
   const _id = req.params.id;
   try {
-    const notaDb = await Nota.findByIdAndDelete({ _id });
-    if (!notaDb) {
+    const registroDb = await Registro.findByIdAndDelete({ _id });
+    if (!registroDb) {
       return res.status(400).json({
         mensaje: "No se encontró el id indicado",
         error,
       });
     }
-    res.json(notaDb);
+    res.json(registroDb);
   } catch (error) {
     return res.status(400).json({
       mensaje: "Ocurrio un error",
@@ -74,13 +74,13 @@ router.delete("/nota/:id", [verificarAuth, verificarAdministrador], async (req, 
   }
 });
 
-// Put actualizar una nota
-router.put("/nota/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+// Put actualizar un registro
+router.put("/registro/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
   const _id = req.params.id;
   const body = req.body;
   try {
-    const notaDb = await Nota.findByIdAndUpdate(_id, body, { new: true });
-    res.json(notaDb);
+    const registroDb = await Registro.findByIdAndUpdate(_id, body, { new: true });
+    res.json(registroDb);
   } catch (error) {
     return res.status(400).json({
       mensaje: "Ocurrio un error",
