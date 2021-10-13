@@ -9,10 +9,6 @@ import User from "../models/user";
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-/* router.get('/', async(req, res) => {
-  return res.json({mensaje: 'loging de acceso'})
-}); */
-
 router.post("/", async (req, res) => {
 
   const body = req.body;
@@ -27,7 +23,7 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // Evaluamos la contraseña correcta
+    // Evaluamos la contraseña
     if (!bcrypt.compareSync(body.pass, usuarioDB.pass)) {
       return res.status(400).json({
         mensaje: "Usuario o contraseña! inválidos",

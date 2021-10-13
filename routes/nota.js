@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-// importar modelos
+// importar modelo
 import Nota from "../models/nota";
 
 // Middlewares
@@ -55,7 +55,7 @@ router.get("/nota", verificarAuth, async (req, res) => {
 });
 
 // Delete eliminar una nota
-router.delete("/nota/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+router.delete("/nota/:id", async (req, res) => {
   const _id = req.params.id;
   try {
     const notaDb = await Nota.findByIdAndDelete({ _id });
@@ -75,7 +75,7 @@ router.delete("/nota/:id", [verificarAuth, verificarAdministrador], async (req, 
 });
 
 // Put actualizar una nota
-router.put("/nota/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+router.put("/nota/:id", async (req, res) => {
   const _id = req.params.id;
   const body = req.body;
   try {

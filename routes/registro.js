@@ -1,8 +1,8 @@
 import express from "express";
-import Registro from "../models/registro";
 const router = express.Router();
 
-
+// importar modelo
+import Registro from "../models/registro";
 
 // Middlewares
 const {verificarAuth, verificarAdministrador} = require('../middlewares/autenticacion');
@@ -55,7 +55,7 @@ router.get("/registro", verificarAuth, async (req, res) => {
 });
 
 // Delete eliminar una registro
-router.delete("/registro/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+router.delete("/registro/:id", async (req, res) => {
   const _id = req.params.id;
   try {
     const registroDb = await Registro.findByIdAndDelete({ _id });
@@ -75,7 +75,7 @@ router.delete("/registro/:id", [verificarAuth, verificarAdministrador], async (r
 });
 
 // Put actualizar un registro
-router.put("/registro/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+router.put("/registro/:id", async (req, res) => {
   const _id = req.params.id;
   const body = req.body;
   try {
