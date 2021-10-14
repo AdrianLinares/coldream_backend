@@ -55,7 +55,7 @@ router.get("/area", verificarAuth, async (req, res) => {
 });
 
 // Delete eliminar una nota
-router.delete("/area/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+router.delete("/area/:id", async (req, res) => {
   const _id = req.params.id;
   try {
     const areaDb = await Area.findByIdAndDelete({ _id });
@@ -75,7 +75,7 @@ router.delete("/area/:id", [verificarAuth, verificarAdministrador], async (req, 
 });
 
 // Put actualizar una nota
-router.put("area/:id", [verificarAuth, verificarAdministrador], async (req, res) => {
+router.put("area/:id", async (req, res) => {
   const _id = req.params.id;
   const body = req.body;
   try {

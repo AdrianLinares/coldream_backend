@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const areaSchema = new Schema({
 
-    nombre: { type: String, required: [true, "Nombre obligatorio"] },
+    area: { type: String, required: [true, "Nombre obligatorio"] },
     docente: { type: String },
     usuarioId: { type: String },
     date: { type: Date, default: Date.now },
