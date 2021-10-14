@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const agendaSchema = new Schema({
 
-    fundacion: { type: String, required: [true, "Nombre obligatorio"] },
+    nombre: { type: String, required: [true, "Nombre obligatorio"] },
     fecha: { type: String },
     hora: { type: String },
     usuarioId: { type: String },
