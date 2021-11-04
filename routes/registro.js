@@ -41,8 +41,6 @@ router.get("/registro/:id", async (req, res) => {
 // Get con todos los documentos
 router.get("/registro", verificarAuth, async (req, res) => {
 
-  const usuarioId = req.usuario._id
-
   try {
     const registroDb = await Registro.find({usuarioId});
     res.json(registroDb);
@@ -54,7 +52,7 @@ router.get("/registro", verificarAuth, async (req, res) => {
   }
 });
 
-// Delete eliminar una registro
+// Delete eliminar un registro
 router.delete("/registro/:id", async (req, res) => {
   const _id = req.params.id;
   try {
